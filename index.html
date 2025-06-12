@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolBox Pro - 50 Essential Tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlRvb2xCb3ggUHJvIC0gNTAgRXNzZW50aWFsIFRvb2xzIiwKICAic2hvcnRfbmFtZSI6ICJUb29sQm94IFBybyIsCiAgImRlc2NyaXB0aW9uIjogIkEgY29tcHJlaGVuc2l2ZSBtb2JpbGUgdG9vbGJveCB3aXRoIDUwIGVzc2VudGlhbCB0b29scyIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFmMjkzNyIsCiAgInRoZW1lX2NvbG9yIjogIiMzYjgyZjYiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeU5UWWdNalUySWo0OGNHRjBhQ0JtYVd4c1BTSWpNell5Wmpjell5SWdaRDBpVFRFeU9DQXhNamhvTVRBd2RqRXdNRWd4TWpoWk1USTRJaTgrUEM5emRtYysiLAogICAgICAic2l6ZXMiOiAiMjU2eDI1NiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
+    <meta name="theme-color" content="#3b82f6">
+    <style>
+        .tool-card { transition: all 0.3s ease; }
+        .tool-card:hover { transform: translateY(-2px); }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-up { animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .dark .bg-white { background-color: #1f2937; }
+        .dark .text-gray-900 { color: #f9fafb; }
+        .dark .text-gray-600 { color: #9ca3af; }
+        .dark .text-gray-700 { color: #d1d5db; }
+        .dark .bg-gray-50 { background-color: #374151; }
+        .dark .bg-gray-100 { background-color: #4b5563; }
+        .dark .border-gray-200 { border-color: #4b5563; }
+        .dark .border-gray-300 { border-color: #6b7280; }
+        .floating-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .modal-overlay { backdrop-filter: blur(4px); }
+    </style>
+</head>
+<body class="bg-gray-50 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50 dark:bg-gray-800">
+        <div class="max-w-md mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-toolbox text-blue-600 text-xl"></i>
+                    <h1 class="text-xl font-bold text-gray-900">ToolBox Pro</h1>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="searchBtn" class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-search text-gray-600"></i>
+                    </button>
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50">
+        <div class="flex items-start justify-center min-h-screen pt-20 px-4">
+            <div class="bg-white rounded-lg w-full max-w-md p-4 slide-up dark:bg-gray-800">
+                <div class="flex items-center space-x-2 mb-4">
+                    <input id="searchInput" type="text" placeholder="Search tools..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button id="closeSearch" class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="searchResults" class="space-y-2 max-h-60 overflow-y-auto"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-md mx-auto px-4 py-6">
+        <!-- Categories -->
+        <div id="categoriesView" class="space-y-6">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">50 Essential Tools</h2>
+                <p class="text-gray-600">Everything you need in one app</p>
+            </div>
+
+            <!-- Category Cards -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="calculators">
+                    <div class="text-center">
+                        <i class="fas fa-calculator text-3xl text-blue-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Calculators</h3>
+                        <p class="text-sm text-gray-600">5 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="converters">
+                    <div class="text-center">
+                        <i class="fas fa-exchange-alt text-3xl text-green-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Converters</h3>
+                        <p class="text-sm text-gray-600">8 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="utilities">
+                    <div class="text-center">
+                        <i class="fas fa-wrench text-3xl text-orange-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Utilities</h3>
+                        <p class="text-sm text-gray-600">7 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="productivity">
+                    <div class="text-center">
+                        <i class="fas fa-tasks text-3xl text-purple-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Productivity</h3>
+                        <p class="text-sm text-gray-600">6 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="finance">
+                    <div class="text-center">
+                        <i class="fas fa-dollar-sign text-3xl text-emerald-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Finance</h3>
+                        <p class="text-sm text-gray-600">5 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="health">
+                    <div class="text-center">
+                        <i class="fas fa-heartbeat text-3xl text-red-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Health</h3>
+                        <p class="text-sm text-gray-600">5 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="developer">
+                    <div class="text-center">
+                        <i class="fas fa-code text-3xl text-indigo-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Developer</h3>
+                        <p class="text-sm text-gray-600">6 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="design">
+                    <div class="text-center">
+                        <i class="fas fa-palette text-3xl text-pink-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Design</h3>
+                        <p class="text-sm text-gray-600">4 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="text">
+                    <div class="text-center">
+                        <i class="fas fa-font text-3xl text-yellow-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Text Tools</h3>
+                        <p class="text-sm text-gray-600">2 tools</p>
+                    </div>
+                </div>
+                <div class="category-card tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer" data-category="entertainment">
+                    <div class="text-center">
+                        <i class="fas fa-gamepad text-3xl text-cyan-600 mb-2"></i>
+                        <h3 class="font-semibold text-gray-900">Fun</h3>
+                        <p class="text-sm text-gray-600">2 tools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools List View -->
+        <div id="toolsListView" class="hidden">
+            <div class="flex items-center justify-between mb-6">
+                <button id="backToCategories" class="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                <h2 id="categoryTitle" class="text-xl font-bold text-gray-900"></h2>
+                <div></div>
+            </div>
+            <div id="toolsList" class="space-y-3"></div>
+        </div>
+
+        <!-- Tool Detail View -->
+        <div id="toolDetailView" class="hidden">
+            <div class="flex items-center justify-between mb-6">
+                <button id="backToTools" class="flex items-center space-x-2 text-blue-600 hover:text-blue-700">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                <h2 id="toolTitle" class="text-xl font-bold text-gray-900"></h2>
+                <button id="favoriteBtn" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="far fa-heart text-gray-600"></i>
+                </button>
+            </div>
+            <div id="toolContent" class="bg-white rounded-lg p-6 shadow-md"></div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button id="favoritesBtn" class="floating-btn bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors">
+        <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Favorites Modal -->
+    <div id="favoritesModal" class="fixed inset-0 bg-black bg-opacity-50 modal-overlay hidden z-50">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="bg-white rounded-lg w-full max-w-md p-6 slide-up dark:bg-gray-800">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-gray-900">Favorite Tools</h3>
+                    <button id="closeFavorites" class="p-2 text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="favoritesList" class="space-y-2 max-h-60 overflow-y-auto"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // App State
+        let currentView = 'categories';
+        let currentCategory = '';
+        let currentTool = '';
+        let favorites = JSON.parse(localStorage.getItem('toolbox-favorites') || '[]');
+        let isDarkMode = localStorage.getItem('toolbox-theme') === 'dark';
+
+        // Tools Data
+        const toolsData = {
+            calculators: [
+                { id: 'basic-calc', name: 'Basic Calculator', icon: 'fas fa-calculator', description: 'Standard arithmetic calculator' },
+                { id: 'scientific-calc', name: 'Scientific Calculator', icon: 'fas fa-calculator', description: 'Advanced mathematical functions' },
+                { id: 'age-calc', name: 'Age Calculator', icon: 'fas fa-birthday-cake', description: 'Calculate age from birth date' },
+                { id: 'percentage-calc', name: 'Percentage Calculator', icon: 'fas fa-percent', description: 'Calculate percentages easily' },
+                { id: 'loan-calc', name: 'Loan Calculator', icon: 'fas fa-money-bill-wave', description: 'Calculate loan payments' }
+            ],
+            converters: [
+                { id: 'unit-converter', name: 'Unit Converter', icon: 'fas fa-exchange-alt', description: 'Convert between units' },
+                { id: 'currency-converter', name: 'Currency Converter', icon: 'fas fa-coins', description: 'Convert currencies' },
+                { id: 'temp-converter', name: 'Temperature Converter', icon: 'fas fa-thermometer-half', description: 'Convert temperature units' },
+                { id: 'base-converter', name: 'Number Base Converter', icon: 'fas fa-hashtag', description: 'Convert number bases' },
+                { id: 'color-converter', name: 'Color Converter', icon: 'fas fa-palette', description: 'Convert color formats' },
+                { id: 'timezone-converter', name: 'Time Zone Converter', icon: 'fas fa-clock', description: 'Convert time zones' },
+                { id: 'filesize-converter', name: 'File Size Converter', icon: 'fas fa-file', description: 'Convert file sizes' },
+                { id: 'speed-converter', name: 'Speed Converter', icon: 'fas fa-tachometer-alt', description: 'Convert speed units' }
+            ],
+            utilities: [
+                { id: 'qr-generator', name: 'QR Code Generator', icon: 'fas fa-qrcode', description: 'Generate QR codes' },
+                { id: 'password-generator', name: 'Password Generator', icon: 'fas fa-key', description: 'Generate secure passwords' },
+                { id: 'url-shortener', name: 'URL Shortener', icon: 'fas fa-link', description: 'Shorten long URLs' },
+                { id: 'random-number', name: 'Random Number Generator', icon: 'fas fa-dice', description: 'Generate random numbers' },
+                { id: 'uuid-generator', name: 'UUID Generator', icon: 'fas fa-fingerprint', description: 'Generate unique IDs' },
+                { id: 'hash-generator', name: 'Hash Generator', icon: 'fas fa-lock', description: 'Generate hash values' },
+                { id: 'base64-encoder', name: 'Base64 Encoder/Decoder', icon: 'fas fa-code', description: 'Encode/decode Base64' }
+            ],
+            productivity: [
+                { id: 'todo-list', name: 'To-Do List', icon: 'fas fa-list-check', description: 'Manage your tasks' },
+                { id: 'timer-stopwatch', name: 'Timer & Stopwatch', icon: 'fas fa-stopwatch', description: 'Time tracking tools' },
+                { id: 'note-taker', name: 'Note Taker', icon: 'fas fa-sticky-note', description: 'Quick note taking' },
+                { id: 'word-counter', name: 'Word Counter', icon: 'fas fa-sort-numeric-up', description: 'Count words and characters' },
+                { id: 'pomodoro-timer', name: 'Pomodoro Timer', icon: 'fas fa-tomato', description: 'Focus with Pomodoro technique' },
+                { id: 'habit-tracker', name: 'Habit Tracker', icon: 'fas fa-check-circle', description: 'Track daily habits' }
+            ],
+            finance: [
+                { id: 'tip-calculator', name: 'Tip Calculator', icon: 'fas fa-receipt', description: 'Calculate tips and splits' },
+                { id: 'investment-calc', name: 'Investment Calculator', icon: 'fas fa-chart-line', description: 'Calculate investment returns' },
+                { id: 'mortgage-calc', name: 'Mortgage Calculator', icon: 'fas fa-home', description: 'Calculate mortgage payments' },
+                { id: 'tax-calculator', name: 'Tax Calculator', icon: 'fas fa-file-invoice-dollar', description: 'Calculate taxes' },
+                { id: 'budget-tracker', name: 'Budget Tracker', icon: 'fas fa-wallet', description: 'Track your budget' }
+            ],
+            health: [
+                { id: 'bmi-calculator', name: 'BMI Calculator', icon: 'fas fa-weight', description: 'Calculate body mass index' },
+                { id: 'calorie-calculator', name: 'Calorie Calculator', icon: 'fas fa-apple-alt', description: 'Calculate daily calories' },
+                { id: 'water-tracker', name: 'Water Intake Tracker', icon: 'fas fa-tint', description: 'Track water consumption' },
+                { id: 'sleep-tracker', name: 'Sleep Tracker', icon: 'fas fa-bed', description: 'Track sleep patterns' },
+                { id: 'heartrate-calc', name: 'Heart Rate Calculator', icon: 'fas fa-heartbeat', description: 'Calculate target heart rate' }
+            ],
+            developer: [
+                { id: 'json-formatter', name: 'JSON Formatter', icon: 'fas fa-code', description: 'Format and validate JSON' },
+                { id: 'css-minifier', name: 'CSS Minifier', icon: 'fab fa-css3-alt', description: 'Minify CSS code' },
+                { id: 'color-picker', name: 'Color Picker', icon: 'fas fa-eye-dropper', description: 'Pick and convert colors' },
+                { id: 'regex-tester', name: 'Regex Tester', icon: 'fas fa-search', description: 'Test regular expressions' },
+                { id: 'code-beautifier', name: 'Code Beautifier', icon: 'fas fa-magic', description: 'Beautify code' },
+                { id: 'lorem-generator', name: 'Lorem Ipsum Generator', icon: 'fas fa-paragraph', description: 'Generate placeholder text' }
+            ],
+            design: [
+                { id: 'gradient-generator', name: 'Gradient Generator', icon: 'fas fa-fill-drip', description: 'Create CSS gradients' },
+                { id: 'font-pairing', name: 'Font Pairing', icon: 'fas fa-font', description: 'Find font combinations' },
+                { id: 'icon-generator', name: 'Icon Generator', icon: 'fas fa-icons', description: 'Generate simple icons' },
+                { id: 'mockup-generator', name: 'Mockup Generator', icon: 'fas fa-mobile-alt', description: 'Create device mockups' }
+            ],
+            text: [
+                { id: 'text-case-converter', name: 'Text Case Converter', icon: 'fas fa-text-height', description: 'Convert text case' },
+                { id: 'text-diff', name: 'Text Diff Checker', icon: 'fas fa-not-equal', description: 'Compare text differences' }
+            ],
+            entertainment: [
+                { id: 'dice-roller', name: 'Dice Roller', icon: 'fas fa-dice', description: 'Roll virtual dice' },
+                { id: 'magic-8ball', name: 'Magic 8 Ball', icon: 'fas fa-magic', description: 'Get mystical answers' }
+            ]
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun text-gray-600"></i>';
+            }
+        });
+
+        function initializeApp() {
+            showView('categories');
+        }
+
+        function setupEventListeners() {
+            // Theme Toggle
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Search
+            document.getElementById('searchBtn').addEventListener('click', openSearch);
+            document.getElementById('closeSearch').addEventListener('click', closeSearch);
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+
+            // Navigation
+            document.getElementById('backToCategories').addEventListener('click', () => showView('categories'));
+            document.getElementById('backToTools').addEventListener('click', () => showView('tools', currentCategory));
+
+            // Category cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const category = card.dataset.category;
+                    showView('tools', category);
+                });
+            });
+
+            // Favorites
+            document.getElementById('favoritesBtn').addEventListener('click', openFavorites);
+            document.getElementById('closeFavorites').addEventListener('click', closeFavorites);
+            document.getElementById('favoriteBtn').addEventListener('click', toggleFavorite);
+
+            // Close modals on overlay click
+            document.getElementById('searchModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeSearch();
+            });
+            document.getElementById('favoritesModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) closeFavorites();
+            });
+        }
+
+        function showView(view, category = '', tool = '') {
+            // Hide all views
+            document.getElementById('categoriesView').classList.add('hidden');
+            document.getElementById('toolsListView').classList.add('hidden');
+            document.getElementById('toolDetailView').classList.add('hidden');
+
+            currentView = view;
+
+            if (view === 'categories') {
+                document.getElementById('categoriesView').classList.remove('hidden');
+            } else if (view === 'tools') {
+                currentCategory = category;
+                document.getElementById('toolsListView').classList.remove('hidden');
+                document.getElementById('categoryTitle').textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                renderToolsList(category);
+            } else if (view === 'tool') {
+                currentTool = tool;
+                document.getElementById('toolDetailView').classList.remove('hidden');
+                renderToolDetail(tool);
+            }
+        }
+
+        function renderToolsList(category) {
+            const toolsList = document.getElementById('toolsList');
+            const tools = toolsData[category] || [];
+            
+            toolsList.innerHTML = tools.map(tool => `
+                <div class="tool-card bg-white rounded-lg p-4 shadow-md cursor-pointer hover:shadow-lg transition-all" data-tool="${tool.id}">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="${tool.icon} text-blue-600 text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900">${tool.name}</h3>
+                            <p class="text-sm text-gray-600">${tool.description}</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            ${favorites.includes(tool.id) ? '<i class="fas fa-heart text-red-500"></i>' : ''}
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add click listeners
+            toolsList.querySelectorAll('.tool-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const toolId = card.dataset.tool;
+                    showView('tool', currentCategory, toolId);
+                });
+            });
+        }
+
+        function renderToolDetail(toolId) {
+            const tool = findToolById(toolId);
+            if (!tool) return;
+
+            document.getElementById('toolTitle').textContent = tool.name;
+            
+            // Update favorite button
+            const favoriteBtn = document.getElementById('favoriteBtn');
+            const isFavorite = favorites.includes(toolId);
+            favoriteBtn.innerHTML = `<i class="${isFavorite ? 'fas' : 'far'} fa-heart ${isFavorite ? 'text-red-500' : 'text-gray-600'}"></i>`;
+
+            // Render tool content
+            const toolContent = document.getElementById('toolContent');
+            toolContent.innerHTML = getToolContent(toolId);
+
+            // Initialize tool-specific functionality
+            initializeToolFunctionality(toolId);
+        }
+
+        function getToolContent(toolId) {
+            switch(toolId) {
+                case 'basic-calc':
+                    return `
+                        <div class="calculator">
+                            <div class="mb-4">
+                                <input type="text" id="calcDisplay" class="w-full p-3 text-right text-xl border border-gray-300 rounded-lg bg-gray-50" readonly>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button class="calc-btn bg-gray-200 p-3 rounded-lg font-semibold" onclick="clearCalculator()">C</button>
+                                <button class="calc-btn bg-gray-200 p-3 rounded-lg font-semibold" onclick="deleteLast()">⌫</button>
+                                <button class="calc-btn bg-gray-200 p-3 rounded-lg font-semibold" onclick="appendToDisplay('/')">/</button>
+                                <button class="calc-btn bg-gray-200 p-3 rounded-lg font-semibold" onclick="appendToDisplay('*')">×</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('7')">7</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('8')">8</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('9')">9</button>
+                                <button class="calc-btn bg-gray-200 p-3 rounded-lg font-semibold" onclick="appendToDisplay('-')">-</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('4')">4</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('5')">5</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('6')">6</button>
+                                <button class="calc-btn bg-gray-200 p-3 rounded-lg font-semibold" onclick="appendToDisplay('+')">+</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('1')">1</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('2')">2</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('3')">3</button>
+                                <button class="calc-btn bg-blue-600 text-white p-3 rounded-lg font-semibold row-span-2" onclick="calculate()" rowspan="2">=</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold col-span-2" onclick="appendToDisplay('0')">0</button>
+                                <button class="calc-btn bg-blue-100 p-3 rounded-lg font-semibold" onclick="appendToDisplay('.')">.</button>
+                            </div>
+                        </div>
+                    `;
+
+                case 'age-calc':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Birth Date</label>
+                                <input type="date" id="birthDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <button onclick="calculateAge()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Calculate Age</button>
+                            <div id="ageResult" class="p-4 bg-gray-50 rounded-lg hidden">
+                                <h3 class="font-semibold text-gray-900 mb-2">Your Age</h3>
+                                <div id="ageDisplay"></div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'qr-generator':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Text or URL</label>
+                                <textarea id="qrText" placeholder="Enter text or URL to generate QR code" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                            </div>
+                            <button onclick="generateQR()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Generate QR Code</button>
+                            <div id="qrResult" class="text-center hidden">
+                                <div id="qrCanvas" class="inline-block border border-gray-300 rounded-lg p-4 bg-white"></div>
+                                <p class="text-sm text-gray-600 mt-2">Right-click to save the QR code</p>
+                            </div>
+                        </div>
+                    `;
+
+                case 'password-generator':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Password Length</label>
+                                <input type="range" id="passwordLength" min="4" max="50" value="12" class="w-full">
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>4</span>
+                                    <span id="lengthDisplay">12</span>
+                                    <span>50</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="includeUppercase" checked class="rounded">
+                                    <span class="text-sm">Include Uppercase (A-Z)</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="includeLowercase" checked class="rounded">
+                                    <span class="text-sm">Include Lowercase (a-z)</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="includeNumbers" checked class="rounded">
+                                    <span class="text-sm">Include Numbers (0-9)</span>
+                                </label>
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" id="includeSymbols" class="rounded">
+                                    <span class="text-sm">Include Symbols (!@#$%^&*)</span>
+                                </label>
+                            </div>
+                            <button onclick="generatePassword()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Generate Password</button>
+                            <div id="passwordResult" class="hidden">
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" id="generatedPassword" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                                    <button onclick="copyPassword()" class="bg-gray-200 px-3 py-2 rounded-lg hover:bg-gray-300 transition-colors">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <div id="passwordStrength" class="mt-2 text-sm"></div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'bmi-calculator':
+                    return `
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Weight</label>
+                                    <div class="flex">
+                                        <input type="number" id="weight" placeholder="70" class="flex-1 px-3 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <select id="weightUnit" class="border border-l-0 border-gray-300 rounded-r-lg px-3 py-2">
+                                            <option value="kg">kg</option>
+                                            <option value="lbs">lbs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Height</label>
+                                    <div class="flex">
+                                        <input type="number" id="height" placeholder="175" class="flex-1 px-3 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <select id="heightUnit" class="border border-l-0 border-gray-300 rounded-r-lg px-3 py-2">
+                                            <option value="cm">cm</option>
+                                            <option value="ft">ft</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="calculateBMI()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Calculate BMI</button>
+                            <div id="bmiResult" class="p-4 bg-gray-50 rounded-lg hidden">
+                                <div class="text-center">
+                                    <div id="bmiValue" class="text-3xl font-bold text-blue-600 mb-2"></div>
+                                    <div id="bmiCategory" class="text-lg font-semibold mb-2"></div>
+                                    <div id="bmiDescription" class="text-sm text-gray-600"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'unit-converter':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Conversion Type</label>
+                                <select id="conversionType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateUnits()">
+                                    <option value="length">Length</option>
+                                    <option value="weight">Weight</option>
+                                    <option value="temperature">Temperature</option>
+                                    <option value="area">Area</option>
+                                    <option value="volume">Volume</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-1 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">From</label>
+                                    <div class="flex space-x-2">
+                                        <input type="number" id="fromValue" placeholder="1" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="convertUnits()">
+                                        <select id="fromUnit" class="px-3 py-2 border border-gray-300 rounded-lg" onchange="convertUnits()"></select>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <i class="fas fa-exchange-alt text-gray-400"></i>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">To</label>
+                                    <div class="flex space-x-2">
+                                        <input type="number" id="toValue" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                                        <select id="toUnit" class="px-3 py-2 border border-gray-300 rounded-lg" onchange="convertUnits()"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'todo-list':
+                    return `
+                        <div class="space-y-4">
+                            <div class="flex space-x-2">
+                                <input type="text" id="todoInput" placeholder="Add a new task..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" onkeypress="if(event.key==='Enter')addTodo()">
+                                <button onclick="addTodo()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div id="todoList" class="space-y-2"></div>
+                            <div class="flex justify-between text-sm text-gray-600">
+                                <span id="todoStats">0 tasks</span>
+                                <button onclick="clearCompleted()" class="text-red-600 hover:text-red-700">Clear completed</button>
+                            </div>
+                        </div>
+                    `;
+
+                case 'timer-stopwatch':
+                    return `
+                        <div class="space-y-6">
+                            <div class="flex border-b border-gray-200">
+                                <button id="timerTab" class="flex-1 py-2 px-4 text-center border-b-2 border-blue-600 text-blue-600 font-semibold" onclick="switchTimerMode('timer')">Timer</button>
+                                <button id="stopwatchTab" class="flex-1 py-2 px-4 text-center border-b-2 border-transparent text-gray-600" onclick="switchTimerMode('stopwatch')">Stopwatch</button>
+                            </div>
+                            
+                            <div id="timerMode">
+                                <div class="text-center">
+                                    <div class="text-4xl font-mono font-bold text-gray-900 mb-4" id="timerDisplay">05:00</div>
+                                    <div class="flex space-x-2 mb-4">
+                                        <button onclick="setTimer(300)" class="bg-gray-200 px-3 py-1 rounded text-sm">5m</button>
+                                        <button onclick="setTimer(600)" class="bg-gray-200 px-3 py-1 rounded text-sm">10m</button>
+                                        <button onclick="setTimer(900)" class="bg-gray-200 px-3 py-1 rounded text-sm">15m</button>
+                                        <button onclick="setTimer(1800)" class="bg-gray-200 px-3 py-1 rounded text-sm">30m</button>
+                                    </div>
+                                    <div class="flex justify-center space-x-4">
+                                        <button id="timerStartBtn" onclick="startTimer()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">Start</button>
+                                        <button onclick="resetTimer()" class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="stopwatchMode" class="hidden">
+                                <div class="text-center">
+                                    <div class="text-4xl font-mono font-bold text-gray-900 mb-4" id="stopwatchDisplay">00:00:00</div>
+                                    <div class="flex justify-center space-x-4">
+                                        <button id="stopwatchStartBtn" onclick="startStopwatch()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">Start</button>
+                                        <button onclick="resetStopwatch()" class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'tip-calculator':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Bill Amount</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-2 text-gray-500">$</span>
+                                    <input type="number" id="billAmount" placeholder="0.00" step="0.01" class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateTip()">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tip Percentage</label>
+                                <div class="flex space-x-2 mb-2">
+                                    <button onclick="setTipPercentage(15)" class="flex-1 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">15%</button>
+                                    <button onclick="setTipPercentage(18)" class="flex-1 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">18%</button>
+                                    <button onclick="setTipPercentage(20)" class="flex-1 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">20%</button>
+                                    <button onclick="setTipPercentage(25)" class="flex-1 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">25%</button>
+                                </div>
+                                <input type="range" id="tipPercentage" min="0" max="30" value="18" class="w-full" oninput="updateTipPercentage(); calculateTip()">
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>0%</span>
+                                    <span id="tipPercentageDisplay">18%</span>
+                                    <span>30%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Number of People</label>
+                                <input type="number" id="numPeople" value="1" min="1" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateTip()">
+                            </div>
+                            <div id="tipResult" class="p-4 bg-gray-50 rounded-lg">
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div>
+                                        <div class="text-sm text-gray-600">Tip Amount</div>
+                                        <div id="tipAmount" class="text-xl font-bold text-green-600">$0.00</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-600">Total</div>
+                                        <div id="totalAmount" class="text-xl font-bold text-blue-600">$0.00</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-600">Per Person</div>
+                                        <div id="perPersonAmount" class="text-xl font-bold text-purple-600">$0.00</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-600">Tip Per Person</div>
+                                        <div id="tipPerPersonAmount" class="text-xl font-bold text-orange-600">$0.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'word-counter':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Enter your text</label>
+                                <textarea id="textInput" placeholder="Type or paste your text here..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-40" oninput="countWords()"></textarea>
+                            </div>
+                            <div id="wordStats" class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-3 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-blue-600" id="wordCount">0</div>
+                                    <div class="text-sm text-gray-600">Words</div>
+                                </div>
+                                <div class="bg-green-50 p-3 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-green-600" id="charCount">0</div>
+                                    <div class="text-sm text-gray-600">Characters</div>
+                                </div>
+                                <div class="bg-purple-50 p-3 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-purple-600" id="charCountNoSpaces">0</div>
+                                    <div class="text-sm text-gray-600">No Spaces</div>
+                                </div>
+                                <div class="bg-orange-50 p-3 rounded-lg text-center">
+                                    <div class="text-2xl font-bold text-orange-600" id="paragraphCount">0</div>
+                                    <div class="text-sm text-gray-600">Paragraphs</div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="text-sm text-gray-600 mb-1">Reading time</div>
+                                <div id="readingTime" class="font-semibold">0 minutes</div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'color-picker':
+                    return `
+                        <div class="space-y-4">
+                            <div class="text-center">
+                                <input type="color" id="colorInput" value="#3b82f6" class="w-20 h-20 border border-gray-300 rounded-lg cursor-pointer mx-auto" onchange="updateColor()">
+                            </div>
+                            <div id="colorInfo" class="space-y-3">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">HEX</label>
+                                        <input type="text" id="hexValue" readonly class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">RGB</label>
+                                        <input type="text" id="rgbValue" readonly class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">HSL</label>
+                                        <input type="text" id="hslValue" readonly class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">HSV</label>
+                                        <input type="text" id="hsvValue" readonly class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-700 mb-2">Color Palette</h3>
+                                <div id="colorPalette" class="grid grid-cols-5 gap-2"></div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'json-formatter':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">JSON Input</label>
+                                <textarea id="jsonInput" placeholder='{"name": "John", "age": 30}' class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 font-mono text-sm"></textarea>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="formatJSON()" class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Format</button>
+                                <button onclick="minifyJSON()" class="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">Minify</button>
+                                <button onclick="validateJSON()" class="flex-1 bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">Validate</button>
+                            </div>
+                            <div id="jsonOutput" class="hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Output</label>
+                                <textarea id="jsonResult" readonly class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 h-32 font-mono text-sm"></textarea>
+                                <button onclick="copyJSON()" class="mt-2 bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-300 transition-colors">
+                                    <i class="fas fa-copy mr-1"></i> Copy
+                                </button>
+                            </div>
+                            <div id="jsonStatus" class="text-sm"></div>
+                        </div>
+                    `;
+
+                case 'dice-roller':
+                    return `
+                        <div class="space-y-4">
+                            <div class="text-center">
+                                <div id="diceDisplay" class="text-6xl mb-4">🎲</div>
+                                <div id="diceResult" class="text-2xl font-bold text-blue-600 mb-4">Roll the dice!</div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button onclick="rollDice(4)" class="bg-blue-100 hover:bg-blue-200 py-3 rounded-lg transition-colors">
+                                    <div class="text-lg font-bold">D4</div>
+                                    <div class="text-xs text-gray-600">4-sided</div>
+                                </button>
+                                <button onclick="rollDice(6)" class="bg-green-100 hover:bg-green-200 py-3 rounded-lg transition-colors">
+                                    <div class="text-lg font-bold">D6</div>
+                                    <div class="text-xs text-gray-600">6-sided</div>
+                                </button>
+                                <button onclick="rollDice(8)" class="bg-yellow-100 hover:bg-yellow-200 py-3 rounded-lg transition-colors">
+                                    <div class="text-lg font-bold">D8</div>
+                                    <div class="text-xs text-gray-600">8-sided</div>
+                                </button>
+                                <button onclick="rollDice(10)" class="bg-purple-100 hover:bg-purple-200 py-3 rounded-lg transition-colors">
+                                    <div class="text-lg font-bold">D10</div>
+                                    <div class="text-xs text-gray-600">10-sided</div>
+                                </button>
+                                <button onclick="rollDice(12)" class="bg-pink-100 hover:bg-pink-200 py-3 rounded-lg transition-colors">
+                                    <div class="text-lg font-bold">D12</div>
+                                    <div class="text-xs text-gray-600">12-sided</div>
+                                </button>
+                                <button onclick="rollDice(20)" class="bg-red-100 hover:bg-red-200 py-3 rounded-lg transition-colors">
+                                    <div class="text-lg font-bold">D20</div>
+                                    <div class="text-xs text-gray-600">20-sided</div>
+                                </button>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Multiple Dice</label>
+                                <div class="flex space-x-2">
+                                    <input type="number" id="numDice" value="1" min="1" max="10" class="w-20 px-3 py-2 border border-gray-300 rounded-lg">
+                                    <span class="flex items-center">×</span>
+                                    <select id="diceType" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+                                        <option value="6">D6</option>
+                                        <option value="4">D4</option>
+                                        <option value="8">D8</option>
+                                        <option value="10">D10</option>
+                                        <option value="12">D12</option>
+                                        <option value="20">D20</option>
+                                    </select>
+                                    <button onclick="rollMultipleDice()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Roll</button>
+                                </div>
+                            </div>
+                            <div id="multipleResults" class="hidden">
+                                <h3 class="font-semibold mb-2">Results:</h3>
+                                <div id="diceResults" class="text-sm text-gray-600"></div>
+                                <div id="diceSum" class="text-lg font-bold text-blue-600 mt-2"></div>
+                            </div>
+                        </div>
+                    `;
+
+                default:
+                    return `
+                        <div class="text-center py-8">
+                            <i class="fas fa-cog text-4xl text-gray-400 mb-4"></i>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Tool Coming Soon</h3>
+                            <p class="text-gray-600">This tool is currently under development.</p>
+                        </div>
+                    `;
+            }
+        }
+
+        function initializeToolFunctionality(toolId) {
+            switch(toolId) {
+                case 'password-generator':
+                    document.getElementById('passwordLength').addEventListener('input', function() {
+                        document.getElementById('lengthDisplay').textContent = this.value;
+                    });
+                    break;
+                case 'unit-converter':
+                    updateUnits();
+                    break;
+                case 'color-picker':
+                    updateColor();
+                    break;
+                case 'todo-list':
+                    loadTodos();
+                    break;
+                case 'word-counter':
+                    countWords();
+                    break;
+                case 'tip-calculator':
+                    calculateTip();
+                    break;
+            }
+        }
+
+        // Tool Functions
+        let calcDisplay = '';
+        function appendToDisplay(value) {
+            document.getElementById('calcDisplay').value += value;
+        }
+        function clearCalculator() {
+            document.getElementById('calcDisplay').value = '';
+        }
+        function deleteLast() {
+            const display = document.getElementById('calcDisplay');
+            display.value = display.value.slice(0, -1);
+        }
+        function calculate() {
+            try {
+                const result = eval(document.getElementById('calcDisplay').value.replace('×', '*'));
+                document.getElementById('calcDisplay').value = result;
+            } catch (e) {
+                document.getElementById('calcDisplay').value = 'Error';
+            }
+        }
+
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const today = new Date();
+            
+            if (!birthDate || birthDate > today) {
+                alert('Please enter a valid birth date');
+                return;
+            }
+
+            const years = today.getFullYear() - birthDate.getFullYear();
+            const months = today.getMonth() - birthDate.getMonth();
+            const days = today.getDate() - birthDate.getDate();
+
+            let ageYears = years;
+            let ageMonths = months;
+            let ageDays = days;
+
+            if (days < 0) {
+                ageMonths--;
+                ageDays += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                ageYears--;
+                ageMonths += 12;
+            }
+
+            document.getElementById('ageResult').classList.remove('hidden');
+            document.getElementById('ageDisplay').innerHTML = `
+                <div class="text-lg">${ageYears} years, ${ageMonths} months, ${ageDays} days</div>
+                <div class="text-sm text-gray-600 mt-2">Total days: ${Math.floor((today - birthDate) / (1000 * 60 * 60 * 24))}</div>
+            `;
+        }
+
+        function generateQR() {
+            const text = document.getElementById('qrText').value.trim();
+            if (!text) {
+                alert('Please enter text or URL');
+                return;
+            }
+
+            // Simple QR code generation using online service
+            const qrCanvas = document.getElementById('qrCanvas');
+            qrCanvas.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}" alt="QR Code" class="rounded">`;
+            document.getElementById('qrResult').classList.remove('hidden');
+        }
+
+        function generatePassword() {
+            const length = parseInt(document.getElementById('passwordLength').value);
+            const includeUpper = document.getElementById('includeUppercase').checked;
+            const includeLower = document.getElementById('includeLowercase').checked;
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeSymbols = document.getElementById('includeSymbols').checked;
+
+            if (!includeUpper && !includeLower && !includeNumbers && !includeSymbols) {
+                alert('Please select at least one character type');
+                return;
+            }
+
+            let charset = '';
+            if (includeUpper) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (includeLower) charset += 'abcdefghijklmnopqrstuvwxyz';
+            if (includeNumbers) charset += '0123456789';
+            if (includeSymbols) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+
+            document.getElementById('generatedPassword').value = password;
+            document.getElementById('passwordResult').classList.remove('hidden');
+
+            // Simple strength calculation
+            let strength = 'Weak';
+            let strengthColor = 'text-red-600';
+            if (length >= 8 && (includeUpper + includeLower + includeNumbers + includeSymbols) >= 3) {
+                strength = 'Strong';
+                strengthColor = 'text-green-600';
+            } else if (length >= 6 && (includeUpper + includeLower + includeNumbers + includeSymbols) >= 2) {
+                strength = 'Medium';
+                strengthColor = 'text-yellow-600';
+            }
+
+            document.getElementById('passwordStrength').innerHTML = `<span class="${strengthColor}">Strength: ${strength}</span>`;
+        }
+
+        function copyPassword() {
+            const password = document.getElementById('generatedPassword');
+            password.select();
+            document.execCommand('copy');
+            alert('Password copied to clipboard!');
+        }
+
+        function calculateBMI() {
+            let weight = parseFloat(document.getElementById('weight').value);
+            let height = parseFloat(document.getElementById('height').value);
+            const weightUnit = document.getElementById('weightUnit').value;
+            const heightUnit = document.getElementById('heightUnit').value;
+
+            if (!weight || !height || weight <= 0 || height <= 0) {
+                alert('Please enter valid weight and height');
+                return;
+            }
+
+            // Convert to metric
+            if (weightUnit === 'lbs') weight = weight * 0.453592;
+            if (heightUnit === 'ft') height = height * 30.48;
+            height = height / 100; // cm to m
+
+            const bmi = weight / (height * height);
+            let category = '';
+            let description = '';
+            let categoryColor = '';
+
+            if (bmi < 18.5) {
+                category = 'Underweight';
+                description = 'Consider consulting a healthcare provider';
+                categoryColor = 'text-blue-600';
+            } else if (bmi < 25) {
+                category = 'Normal weight';
+                description = 'Keep up the good work!';
+                categoryColor = 'text-green-600';
+            } else if (bmi < 30) {
+                category = 'Overweight';
+                description = 'Consider lifestyle changes';
+                categoryColor = 'text-yellow-600';
+            } else {
+                category = 'Obese';
+                description = 'Consider consulting a healthcare provider';
+                categoryColor = 'text-red-600';
+            }
+
+            document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('bmiCategory').className = `text-lg font-semibold mb-2 ${categoryColor}`;
+            document.getElementById('bmiDescription').textContent = description;
+            document.getElementById('bmiResult').classList.remove('hidden');
+        }
+
+        // Unit converter data and functions
+        const unitData = {
+            length: {
+                meter: 1,
+                kilometer: 0.001,
+                centimeter: 100,
+                millimeter: 1000,
+                inch: 39.3701,
+                foot: 3.28084,
+                yard: 1.09361,
+                mile: 0.000621371
+            },
+            weight: {
+                kilogram: 1,
+                gram: 1000,
+                pound: 2.20462,
+                ounce: 35.274,
+                ton: 0.001
+            },
+            temperature: {
+                celsius: 'C',
+                fahrenheit: 'F',
+                kelvin: 'K'
+            }
+        };
+
+        function updateUnits() {
+            const type = document.getElementById('conversionType').value;
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            
+            fromUnit.innerHTML = '';
+            toUnit.innerHTML = '';
+
+            if (type === 'temperature') {
+                ['celsius', 'fahrenheit', 'kelvin'].forEach(unit => {
+                    fromUnit.innerHTML += `<option value="${unit}">${unit.charAt(0).toUpperCase() + unit.slice(1)}</option>`;
+                    toUnit.innerHTML += `<option value="${unit}">${unit.charAt(0).toUpperCase() + unit.slice(1)}</option>`;
+                });
+                toUnit.value = 'fahrenheit';
+            } else {
+                const units = Object.keys(unitData[type] || {});
+                units.forEach(unit => {
+                    fromUnit.innerHTML += `<option value="${unit}">${unit.charAt(0).toUpperCase() + unit.slice(1)}</option>`;
+                    toUnit.innerHTML += `<option value="${unit}">${unit.charAt(0).toUpperCase() + unit.slice(1)}</option>`;
+                });
+                if (units.length > 1) toUnit.value = units[1];
+            }
+            convertUnits();
+        }
+
+        function convertUnits() {
+            const type = document.getElementById('conversionType').value;
+            const fromValue = parseFloat(document.getElementById('fromValue').value) || 0;
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+
+            let result = 0;
+
+            if (type === 'temperature') {
+                result = convertTemperature(fromValue, fromUnit, toUnit);
+            } else {
+                const data = unitData[type];
+                if (data && data[fromUnit] && data[toUnit]) {
+                    result = fromValue / data[fromUnit] * data[toUnit];
+                }
+            }
+
+            document.getElementById('toValue').value = result.toFixed(6).replace(/\.?0+$/, '');
+        }
+
+        function convertTemperature(value, from, to) {
+            if (from === to) return value;
+            
+            // Convert to Celsius first
+            let celsius = value;
+            if (from === 'fahrenheit') celsius = (value - 32) * 5/9;
+            if (from === 'kelvin') celsius = value - 273.15;
+            
+            // Convert from Celsius to target
+            if (to === 'fahrenheit') return celsius * 9/5 + 32;
+            if (to === 'kelvin') return celsius + 273.15;
+            return celsius;
+        }
+
+        // Todo list functions
+        let todos = JSON.parse(localStorage.getItem('toolbox-todos') || '[]');
+
+        function loadTodos() {
+            renderTodos();
+        }
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            todos.push({
+                id: Date.now(),
+                text: text,
+                completed: false,
+                created: new Date().toISOString()
+            });
+
+            input.value = '';
+            saveTodos();
+            renderTodos();
+        }
+
+        function toggleTodo(id) {
+            todos = todos.map(todo => 
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            );
+            saveTodos();
+            renderTodos();
+        }
+
+        function deleteTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            saveTodos();
+            renderTodos();
+        }
+
+        function clearCompleted() {
+            todos = todos.filter(todo => !todo.completed);
+            saveTodos();
+            renderTodos();
+        }
+
+        function saveTodos() {
+            localStorage.setItem('toolbox-todos', JSON.stringify(todos));
+        }
+
+        function renderTodos() {
+            const todoList = document.getElementById('todoList');
+            const todoStats = document.getElementById('todoStats');
+            
+            todoList.innerHTML = todos.map(todo => `
+                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <input type="checkbox" ${todo.completed ? 'checked' : ''} 
+                           onchange="toggleTodo(${todo.id})" class="rounded">
+                    <span class="flex-1 ${todo.completed ? 'line-through text-gray-500' : ''}">${todo.text}</span>
+                    <button onclick="deleteTodo(${todo.id})" class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-trash text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = todos.length;
+            const completed = todos.filter(t => t.completed).length;
+            todoStats.textContent = `${total} tasks (${completed} completed)`;
+        }
+
+        // Timer and Stopwatch
+        let timerInterval = null;
+        let timerSeconds = 300; // 5 minutes default
+        let timerRunning = false;
+        let stopwatchInterval = null;
+        let stopwatchTime = 0;
+        let stopwatchRunning = false;
+
+        function switchTimerMode(mode) {
+            document.getElementById('timerMode').classList.toggle('hidden', mode !== 'timer');
+            document.getElementById('stopwatchMode').classList.toggle('hidden', mode !== 'stopwatch');
+            document.getElementById('timerTab').classList.toggle('border-blue-600', mode === 'timer');
+            document.getElementById('timerTab').classList.toggle('text-blue-600', mode === 'timer');
+            document.getElementById('timerTab').classList.toggle('border-transparent', mode !== 'timer');
+            document.getElementById('timerTab').classList.toggle('text-gray-600', mode !== 'timer');
+            document.getElementById('stopwatchTab').classList.toggle('border-blue-600', mode === 'stopwatch');
+            document.getElementById('stopwatchTab').classList.toggle('text-blue-600', mode === 'stopwatch');
+            document.getElementById('stopwatchTab').classList.toggle('border-transparent', mode !== 'stopwatch');
+            document.getElementById('stopwatchTab').classList.toggle('text-gray-600', mode !== 'stopwatch');
+        }
+
+        function setTimer(seconds) {
+            timerSeconds = seconds;
+            updateTimerDisplay();
+        }
+
+        function startTimer() {
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                document.getElementById('timerStartBtn').textContent = 'Start';
+            } else {
+                timerInterval = setInterval(() => {
+                    timerSeconds--;
+                    updateTimerDisplay();
+                    if (timerSeconds <= 0) {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        document.getElementById('timerStartBtn').textContent = 'Start';
+                        alert('Timer finished!');
+                    }
+                }, 1000);
+                timerRunning = true;
+                document.getElementById('timerStartBtn').textContent = 'Pause';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerSeconds = 300;
+            document.getElementById('timerStartBtn').textContent = 'Start';
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerSeconds / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function startStopwatch() {
+            if (stopwatchRunning) {
+                clearInterval(stopwatchInterval);
+                stopwatchRunning = false;
+                document.getElementById('stopwatchStartBtn').textContent = 'Start';
+            } else {
+                stopwatchInterval = setInterval(() => {
+                    stopwatchTime++;
+                    updateStopwatchDisplay();
+                }, 10);
+                stopwatchRunning = true;
+                document.getElementById('stopwatchStartBtn').textContent = 'Stop';
+            }
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchRunning = false;
+            stopwatchTime = 0;
+            document.getElementById('stopwatchStartBtn').textContent = 'Start';
+            updateStopwatchDisplay();
+        }
+
+        function updateStopwatchDisplay() {
+            const minutes = Math.floor(stopwatchTime / 6000);
+            const seconds = Math.floor((stopwatchTime % 6000) / 100);
+            const centiseconds = stopwatchTime % 100;
+            document.getElementById('stopwatchDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${centiseconds.toString().padStart(2, '0')}`;
+        }
+
+        // Tip Calculator
+        function setTipPercentage(percentage) {
+            document.getElementById('tipPercentage').value = percentage;
+            updateTipPercentage();
+            calculateTip();
+        }
+
+        function updateTipPercentage() {
+            const percentage = document.getElementById('tipPercentage').value;
+            document.getElementById('tipPercentageDisplay').textContent = percentage + '%';
+        }
+
+        function calculateTip() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value) || 0;
+            const tipPercentage = parseFloat(document.getElementById('tipPercentage').value) || 0;
+            const numPeople = parseInt(document.getElementById('numPeople').value) || 1;
+
+            const tipAmount = billAmount * (tipPercentage / 100);
+            const totalAmount = billAmount + tipAmount;
+            const perPersonAmount = totalAmount / numPeople;
+            const tipPerPersonAmount = tipAmount / numPeople;
+
+            document.getElementById('tipAmount').textContent = '$' + tipAmount.toFixed(2);
+            document.getElementById('totalAmount').textContent = '$' + totalAmount.toFixed(2);
+            document.getElementById('perPersonAmount').textContent = '$' + perPersonAmount.toFixed(2);
+            document.getElementById('tipPerPersonAmount').textContent = '$' + tipPerPersonAmount.toFixed(2);
+        }
+
+        // Word Counter
+        function countWords() {
+            const text = document.getElementById('textInput').value;
+            
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const characters = text.length;
+            const charactersNoSpaces = text.replace(/\s/g, '').length;
+            const paragraphs = text.trim() ? text.split(/\n\s*\n/).length : 0;
+            const readingTime = Math.ceil(words / 200); // Average reading speed
+
+            document.getElementById('wordCount').textContent = words;
+            document.getElementById('charCount').textContent = characters;
+            document.getElementById('charCountNoSpaces').textContent = charactersNoSpaces;
+            document.getElementById('paragraphCount').textContent = paragraphs;
+            document.getElementById('readingTime').textContent = readingTime + ' minute' + (readingTime !== 1 ? 's' : '');
+        }
+
+        // Color Picker
+        function updateColor() {
+            const color = document.getElementById('colorInput').value;
+            const rgb = hexToRgb(color);
+            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+            const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+
+            document.getElementById('hexValue').value = color.toUpperCase();
+            document.getElementById('rgbValue').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+            document.getElementById('hslValue').value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            document.getElementById('hsvValue').value = `hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
+
+            generateColorPalette(color);
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function rgbToHsv(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, v = max;
+
+            const d = max - min;
+            s = max === 0 ? 0 : d / max;
+
+            if (max === min) {
+                h = 0;
+            } else {
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                v: Math.round(v * 100)
+            };
+        }
+
+        function generateColorPalette(baseColor) {
+            const palette = document.getElementById('colorPalette');
+            const rgb = hexToRgb(baseColor);
+            const colors = [];
+
+            // Generate variations
+            for (let i = 0; i < 5; i++) {
+                const factor = 0.2 + (i * 0.2);
+                const newR = Math.round(rgb.r * factor);
+                const newG = Math.round(rgb.g * factor);
+                const newB = Math.round(rgb.b * factor);
+                colors.push(`rgb(${newR}, ${newG}, ${newB})`);
+            }
+
+            palette.innerHTML = colors.map(color => `
+                <div class="w-full h-12 rounded cursor-pointer border border-gray-300" 
+                     style="background-color: ${color}" 
+                     onclick="copyColor('${color}')" 
+                     title="Click to copy"></div>
+            `).join('');
+        }
+
+        function copyColor(color) {
+            navigator.clipboard.writeText(color).then(() => {
+                alert('Color copied to clipboard!');
+            });
+        }
+
+        // JSON Formatter
+        function formatJSON() {
+            try {
+                const input = document.getElementById('jsonInput').value;
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 2);
+                document.getElementById('jsonResult').value = formatted;
+                document.getElementById('jsonOutput').classList.remove('hidden');
+                document.getElementById('jsonStatus').innerHTML = '<span class="text-green-600">✓ Valid JSON</span>';
+            } catch (e) {
+                document.getElementById('jsonStatus').innerHTML = `<span class="text-red-600">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        function minifyJSON() {
+            try {
+                const input = document.getElementById('jsonInput').value;
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                document.getElementById('jsonResult').value = minified;
+                document.getElementById('jsonOutput').classList.remove('hidden');
+                document.getElementById('jsonStatus').innerHTML = '<span class="text-green-600">✓ Valid JSON (minified)</span>';
+            } catch (e) {
+                document.getElementById('jsonStatus').innerHTML = `<span class="text-red-600">✗ Error: ${e.message}</span>`;
+            }
+        }
+
+        function validateJSON() {
+            try {
+                const input = document.getElementById('jsonInput').value;
+                JSON.parse(input);
+                document.getElementById('jsonStatus').innerHTML = '<span class="text-green-600">✓ Valid JSON</span>';
+            } catch (e) {
+                document.getElementById('jsonStatus').innerHTML = `<span class="text-red-600">✗ Invalid JSON: ${e.message}</span>`;
+            }
+        }
+
+        function copyJSON() {
+            const result = document.getElementById('jsonResult');
+            result.select();
+            document.execCommand('copy');
+            alert('JSON copied to clipboard!');
+        }
+
+        // Dice Roller
+        function rollDice(sides) {
+            const result = Math.floor(Math.random() * sides) + 1;
+            document.getElementById('diceResult').textContent = result;
+            animateDice();
+        }
+
+        function rollMultipleDice() {
+            const numDice = parseInt(document.getElementById('numDice').value);
+            const diceType = parseInt(document.getElementById('diceType').value);
+            const results = [];
+            let sum = 0;
+
+            for (let i = 0; i < numDice; i++) {
+                const result = Math.floor(Math.random() * diceType) + 1;
+                results.push(result);
+                sum += result;
+            }
+
+            document.getElementById('diceResults').textContent = results.join(', ');
+            document.getElementById('diceSum').textContent = `Total: ${sum}`;
+            document.getElementById('multipleResults').classList.remove('hidden');
+        }
+
+        function animateDice() {
+            const diceDisplay = document.getElementById('diceDisplay');
+            let count = 0;
+            const animationInterval = setInterval(() => {
+                diceDisplay.textContent = '🎲';
+                count++;
+                if (count > 10) {
+                    clearInterval(animationInterval);
+                    diceDisplay.textContent = '🎯';
+                }
+            }, 100);
+        }
+
+        // Utility Functions
+        function findToolById(toolId) {
+            for (const category in toolsData) {
+                const tool = toolsData[category].find(t => t.id === toolId);
+                if (tool) return tool;
+            }
+            return null;
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark', isDarkMode);
+            localStorage.setItem('toolbox-theme', isDarkMode ? 'dark' : 'light');
+            
+            const themeIcon = document.getElementById('themeToggle').querySelector('i');
+            themeIcon.className = isDarkMode ? 'fas fa-sun text-gray-600' : 'fas fa-moon text-gray-600';
+        }
+
+        function openSearch() {
+            document.getElementById('searchModal').classList.remove('hidden');
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearch() {
+            document.getElementById('searchModal').classList.add('hidden');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const results = [];
+
+            if (query.length > 0) {
+                for (const category in toolsData) {
+                    toolsData[category].forEach(tool => {
+                        if (tool.name.toLowerCase().includes(query) || tool.description.toLowerCase().includes(query)) {
+                            results.push({ ...tool, category });
+                        }
+                    });
+                }
+            }
+
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = results.map(tool => `
+                <div class="p-3 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="openToolFromSearch('${tool.id}', '${tool.category}')">
+                    <div class="flex items-center space-x-3">
+                        <i class="${tool.icon} text-blue-600"></i>
+                        <div>
+                            <div class="font-semibold">${tool.name}</div>
+                            <div class="text-sm text-gray-600">${tool.description}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (results.length === 0 && query.length > 0) {
+                searchResults.innerHTML = '<div class="p-3 text-center text-gray-500">No tools found</div>';
+            }
+        }
+
+        function openToolFromSearch(toolId, category) {
+            closeSearch();
+            showView('tool', category, toolId);
+        }
+
+        function toggleFavorite() {
+            if (!currentTool) return;
+
+            const index = favorites.indexOf(currentTool);
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(currentTool);
+            }
+
+            localStorage.setItem('toolbox-favorites', JSON.stringify(favorites));
+            
+            // Update favorite button
+            const favoriteBtn = document.getElementById('favoriteBtn');
+            const isFavorite = favorites.includes(currentTool);
+            favoriteBtn.innerHTML = `<i class="${isFavorite ? 'fas' : 'far'} fa-heart ${isFavorite ? 'text-red-500' : 'text-gray-600'}"></i>`;
+
+            // Update tools list if we're viewing the current category
+            if (currentView === 'tools') {
+                renderToolsList(currentCategory);
+            }
+        }
+
+        function openFavorites() {
+            const favoritesList = document.getElementById('favoritesList');
+            
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<div class="p-3 text-center text-gray-500">No favorite tools yet</div>';
+            } else {
+                const favoriteTools = favorites.map(toolId => {
+                    const tool = findToolById(toolId);
+                    return tool ? { ...tool, id: toolId } : null;
+                }).filter(Boolean);
+
+                favoritesList.innerHTML = favoriteTools.map(tool => `
+                    <div class="p-3 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="openToolFromFavorites('${tool.id}')">
+                        <div class="flex items-center space-x-3">
+                            <i class="${tool.icon} text-blue-600"></i>
+                            <div class="flex-1">
+                                <div class="font-semibold">${tool.name}</div>
+                                <div class="text-sm text-gray-600">${tool.description}</div>
+                            </div>
+                            <i class="fas fa-heart text-red-500"></i>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            document.getElementById('favoritesModal').classList.remove('hidden');
+        }
+
+        function closeFavorites() {
+            document.getElementById('favoritesModal').classList.add('hidden');
+        }
+
+        function openToolFromFavorites(toolId) {
+            const tool = findToolById(toolId);
+            if (!tool) return;
+
+            // Find which category this tool belongs to
+            let toolCategory = '';
+            for (const category in toolsData) {
+                if (toolsData[category].find(t => t.id === toolId)) {
+                    toolCategory = category;
+                    break;
+                }
+            }
+
+            closeFavorites();
+            showView('tool', toolCategory, toolId);
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZXZlbnQpIHsgY29uc29sZS5sb2coJ1NlcnZpY2UgV29ya2VyIGluc3RhbGxlZCcpOyB9KTsgc2VsZi5hZGRFdmVudExpc3RlbmVyKCdhY3RpdmF0ZScsIGZ1bmN0aW9uKGV2ZW50KSB7IGNvbnNvbGUubG9nKCdTZXJ2aWNlIFdvcmtlciBhY3RpdmF0ZWQnKTsgfSk7');
+        }
+    </script>
+</body>
+</html>
